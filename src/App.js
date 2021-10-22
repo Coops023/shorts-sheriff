@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import Weather from "./components/Weather";
 
 const api = {
   key: process.env.REACT_APP_API_KEY,
@@ -9,8 +10,6 @@ const api = {
 function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
-  const [lon, setLon] = useState("");
-  const [lat, setLat] = useState("");
 
   const search = (e) => {
     if (e.key === "Enter") {
@@ -19,42 +18,8 @@ function App() {
         .then((result) => {
           setWeather(result);
           setQuery("");
-          console.log(result);
         });
     }
-  };
-
-  const dateBuilder = (d) => {
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    const days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-
-    let day = days[d.getDay()];
-    let date = d.getDate();
-    let month = months[d.getMonth()];
-    let year = d.getFullYear();
-
-    return `${day} ${date} ${month} ${year}`;
   };
 
   const changeHandler = (e) => {
@@ -62,18 +27,19 @@ function App() {
   };
 
   const currentLocationHandler = (e) => {
+    e.preventDefault();
     navigator.geolocation.getCurrentPosition((position) => {
-      setLat(position.coords.latitude);
-      setLon(position.coords.longitude);
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      fetch(
+        `${api.base}weather?lat=${lat}&lon=${lon}&units=metric&appid=${api.key}`
+      )
+        .then((res) => res.json())
+        .then((result) => {
+          setWeather(result);
+        })
+        .catch((err) => console.log(err));
     });
-    fetch(
-      `${api.base}weather?lat=${lat}&lon=${lon}&units=metric&appid=${api.key}`
-    )
-      .then((res) => res.json())
-      .then((result) => {
-        setWeather(result);
-        console.log(result);
-      });
   };
 
   return (
@@ -90,13 +56,8 @@ function App() {
           />
           <button onClick={currentLocationHandler}>Current Location</button>
         </div>
-        {/* <div>{weather.main.temp}</div>
-        {weather.main.temp < 20 ? (
-          <div>Take those shorts off you lunatic</div>
-        ) : (
-          <div>Get those shorts on mate</div>
-        )} */}
-        <div className="date">{dateBuilder(new Date())}</div>
+
+        <Weather weather={weather} />
       </main>
     </div>
   );
