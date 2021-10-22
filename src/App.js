@@ -9,10 +9,12 @@ const api = {
 function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
+  const [lon, setLon] = useState("");
+  const [lat, setLat] = useState("");
 
   const search = (e) => {
     if (e.key === "Enter") {
-      fetch(`${api.base}weather?q=${query}&units=metrics&appid=${api.key}`)
+      fetch(`${api.base}weather?q=${query}&units=metric&appid=${api.key}`)
         .then((res) => res.json())
         .then((result) => {
           setWeather(result);
@@ -59,6 +61,21 @@ function App() {
     setQuery(e.target.value);
   };
 
+  const currentLocationHandler = (e) => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLat(position.coords.latitude);
+      setLon(position.coords.longitude);
+    });
+    fetch(
+      `${api.base}weather?lat=${lat}&lon=${lon}&units=metric&appid=${api.key}`
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        setWeather(result);
+        console.log(result);
+      });
+  };
+
   return (
     <div className="App">
       <main>
@@ -71,8 +88,14 @@ function App() {
             value={query}
             onKeyPress={search}
           />
+          <button onClick={currentLocationHandler}>Current Location</button>
         </div>
-
+        {/* <div>{weather.main.temp}</div>
+        {weather.main.temp < 20 ? (
+          <div>Take those shorts off you lunatic</div>
+        ) : (
+          <div>Get those shorts on mate</div>
+        )} */}
         <div className="date">{dateBuilder(new Date())}</div>
       </main>
     </div>
