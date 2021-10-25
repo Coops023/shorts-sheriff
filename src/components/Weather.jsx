@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 export default function Weather(props) {
-  const [weather, setWeather] = useState({});
   console.log(props);
   const dateBuilder = (d) => {
     const months = [
