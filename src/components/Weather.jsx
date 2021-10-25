@@ -49,17 +49,18 @@ export default function Weather(props) {
             {Math.round(props.weather.main.temp)}&deg;C <br />
             {props.weather.weather[0].main}
           </div>
-
           <iframe
             src="https://giphy.com/embed/XElwYuzMe4RXz4JiCb"
-            width="350"
-            height="250"
+            width="300"
+            height="200"
             frameBorder="0"
-            class="giphy-embed"
+            className="giphy"
             allowFullScreen
           ></iframe>
 
-          <p className="feedback-message">Its too cold for shorts</p>
+          <p className="feedback-message">
+            Don't even think about wearing shorts!
+          </p>
         </div>
       ) : (
         ""
@@ -76,15 +77,15 @@ export default function Weather(props) {
             {props.weather.weather[0].main}
           </div>
           <iframe
-            src="https://giphy.com/embed/4KMlwaKfznhM4"
-            width="480"
-            height="480"
+            src="https://giphy.com/embed/p2VSvU9O05ADC"
+            width="300"
+            height="200"
             frameBorder="0"
-            class="giphy-embed"
+            className="giphy"
             allowFullScreen
           ></iframe>
 
-          <p className="feedback-message">Get those knee's out champion</p>
+          <p className="feedback-message">Get those knee's out champion!</p>
         </div>
       ) : (
         ""

@@ -25,3 +25,8 @@
   font-weight: bold;
   font-size: large;
 }
+
+.giphy {
+  position: relative;
+  right: 50px;
+}

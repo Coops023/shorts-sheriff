@@ -56,9 +56,14 @@ function App() {
             value={query}
             onKeyPress={search}
           />
-          <p>Or use your current location</p>
+          <p className="info-msg">Or use your current location</p>
           <br />
-          <button onClick={currentLocationHandler}>
+          <button
+            className="current-location-button"
+            onClick={currentLocationHandler}
+          >
+            {" "}
+            Find my location <br />
             <FontAwesomeIcon icon={faLocationDot} />
           </button>
         </div>
