@@ -1,6 +1,8 @@
 import "./App.css";
 import { useState } from "react";
 import Weather from "./components/Weather";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 const api = {
   key: process.env.REACT_APP_API_KEY,
@@ -54,7 +56,11 @@ function App() {
             value={query}
             onKeyPress={search}
           />
-          <button onClick={currentLocationHandler}>Current Location</button>
+          <p>Or use your current location</p>
+          <br />
+          <button onClick={currentLocationHandler}>
+            <FontAwesomeIcon icon={faLocationDot} />
+          </button>
         </div>
 
         <Weather weather={weather} />

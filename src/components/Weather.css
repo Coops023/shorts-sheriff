@@ -1,0 +1,27 @@
+.weather-card {
+  width: 50%;
+  margin: 10% auto;
+  border-radius: 1em;
+  padding: 10px;
+  color: white;
+}
+
+.weather-location {
+  font-size: 1.5em;
+  font-family: monospace;
+  margin-bottom: 10px;
+}
+
+.date {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.weather-conditions {
+  font-size: 3em;
+}
+
+.feedback-message {
+  font-weight: bold;
+  font-size: large;
+}

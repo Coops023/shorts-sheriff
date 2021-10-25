@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Weather.css";
 
 export default function Weather(props) {
   console.log(props);
@@ -36,16 +37,29 @@ export default function Weather(props) {
   };
 
   return (
-    <div>
+    <div className="weather-card">
       {typeof props.weather.main !== "undefined" &&
       props.weather.main.temp < 20 ? (
         <div>
-          <div>
+          <div className="weather-location">
             {props.weather.name}, {props.weather.sys.country}
           </div>
           <div className="date">{dateBuilder(new Date())}</div>
-          <div>{Math.round(props.weather.main.temp)}&deg;C</div>
-          <p>Its too cold for shorts</p>
+          <div className="weather-conditions">
+            {Math.round(props.weather.main.temp)}&deg;C <br />
+            {props.weather.weather[0].main}
+          </div>
+
+          <iframe
+            src="https://giphy.com/embed/XElwYuzMe4RXz4JiCb"
+            width="350"
+            height="250"
+            frameBorder="0"
+            class="giphy-embed"
+            allowFullScreen
+          ></iframe>
+
+          <p className="feedback-message">Its too cold for shorts</p>
         </div>
       ) : (
         ""
@@ -53,12 +67,24 @@ export default function Weather(props) {
       {typeof props.weather.main !== "undefined" &&
       props.weather.main.temp > 20 ? (
         <div>
-          <div>
+          <div className="weather-location">
             {props.weather.name}, {props.weather.sys.country}
           </div>
           <div className="date">{dateBuilder(new Date())}</div>
-          <div>{Math.round(props.weather.main.temp)}&deg;C</div>
-          <p>Get those knee's out champion</p>
+          <div className="weather-conditions">
+            {Math.round(props.weather.main.temp)}&deg;C <br />
+            {props.weather.weather[0].main}
+          </div>
+          <iframe
+            src="https://giphy.com/embed/4KMlwaKfznhM4"
+            width="480"
+            height="480"
+            frameBorder="0"
+            class="giphy-embed"
+            allowFullScreen
+          ></iframe>
+
+          <p className="feedback-message">Get those knee's out champion</p>
         </div>
       ) : (
         ""
