@@ -70,6 +70,10 @@ function App() {
 
         <Weather weather={weather} />
       </main>
+      <footer className="footer">
+        this is an app by Cooper!{" "}
+        <a href="https://github.com/Coops023/shorts-sheriff">github link</a>{" "}
+      </footer>
     </div>
   );
 }
